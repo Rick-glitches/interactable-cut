@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactable Cut</title>
+<title>Rickson Two Times</title>
+
 <style>
 body {
   margin: 0;
@@ -11,6 +12,7 @@ body {
   background: #000;
   color: #fff;
 }
+
 .center {
   display: flex;
   justify-content: center;
@@ -18,105 +20,150 @@ body {
   height: 100vh;
   flex-direction: column;
 }
+
 button {
-  padding: 15px 30px;
+  padding: 12px 20px;
   background: red;
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 18px;
+  margin-top: 10px;
 }
+
 .products {
   display: none;
   padding: 20px;
 }
+
 .card {
   background: #111;
-  padding: 20px;
-  margin: 10px;
+  padding: 15px;
+  margin: 10px 0;
 }
 </style>
 </head>
 
 <body>
 
+<!-- LANDING -->
 <div id="landing" class="center">
   <h1>ACCESS GRANTED</h1>
-  <p>WELCOME TO INTERACTABLE CUT</p>
+  <p>WELCOME TO RICKSON TWO TIMES</p>
   <button onclick="enter()">ENTER STORE</button>
 </div>
- <!-- CART BUTTON -->
-  <button onclick="toggleCart()" style="background: #222; margin-bottom: 20px;">
-    🛒 View Cart (<span id="cart-count">0</span>)
-  </button>
+
+<!-- STORE -->
 <div id="store" class="products">
   <h2>Shop</h2>
 
+  <button onclick="toggleCart()" style="background:#222;">
+    🛒 View Cart (<span id="cart-count">0</span>)
+  </button>
+
+  <!-- PRODUCTS -->
   <div class="card">
     <h3>Black Hoodie</h3>
     <p>KES 2500</p>
-    <button onclick="buy('Black Hoodie')">Buy</button>
+    <button onclick="addToCart('Black Hoodie', 2500)">Add to Cart</button>
   </div>
 
   <div class="card">
     <h3>White T-Shirt</h3>
     <p>KES 1500</p>
-    <button onclick="buy('White T-Shirt')">Buy</button>
+    <button onclick="addToCart('White T-Shirt', 1500)">Add to Cart</button>
   </div>
 
   <div class="card">
     <h3>Oversized Hoodie</h3>
     <p>KES 3000</p>
-    <button onclick="buy('Oversized Hoodie')">Buy</button>
+    <button onclick="addToCart('Oversized Hoodie', 3000)">Add to Cart</button>
   </div>
 
   <div class="card">
     <h3>Premium Cap</h3>
     <p>KES 1200</p>
-    <button onclick="buy('Premium Cap')">Buy</button>
+    <button onclick="addToCart('Cap', 1200)">Add to Cart</button>
   </div>
 
   <div class="card">
     <h3>Graphic Tee</h3>
     <p>KES 1800</p>
-    <button onclick="buy('Graphic Tee')">Buy</button>
+    <button onclick="addToCart('Graphic Tee', 1800)">Add to Cart</button>
   </div>
 
-  <div class="card">
-    <h3>Streetwear Tracksuit</h3>
-    <p>KES 4500</p>
-    <button onclick="buy('Tracksuit')">Buy</button>
-  </div>
-
-  <div class="card">
-    <h3>Minimal Logo Tee</h3>
-    <p>KES 1400</p>
-    <button onclick="buy('Minimal Logo Tee')">Buy</button>
-  </div>
-  <div id="cart" style="display:none; background:#111; padding:20px; margin-top:20px;">
+  <!-- CART -->
+  <div id="cart" style="display:none; background:#111; padding:15px; margin-top:20px;">
     <h3>Your Cart</h3>
     <div id="cart-items"></div>
-    <p><strong>Total: KES <span id="cart-total">0</span></strong></p>
+    <p>Total: KES <span id="cart-total">0</span></p>
+
     <button onclick="checkout()">Checkout</button>
     <button onclick="toggleCart()" style="background:gray;">Close</button>
   </div>
-
 </div>
+
 <script>
+
+let cart = [];
+
+// ENTER STORE
 function enter() {
   document.getElementById('landing').style.display = 'none';
   document.getElementById('store').style.display = 'block';
 }
 
-function buy(item) {
-  let phone = prompt("Enter M-Pesa phone number:");
-  if(phone) {
-    alert("Payment request sent to " + phone + " for " + item);
+// ADD TO CART
+function addToCart(name, price) {
+  cart.push({ name, price });
+  updateCart();
+  alert(name + " added to cart");
+}
+
+// UPDATE CART UI
+function updateCart() {
+  let items = document.getElementById("cart-items");
+  let count = document.getElementById("cart-count");
+  let total = document.getElementById("cart-total");
+
+  items.innerHTML = "";
+  let sum = 0;
+
+  cart.forEach((item, index) => {
+    sum += item.price;
+
+    items.innerHTML += `
+      <div>
+        ${item.name} - KES ${item.price}
+        <button onclick="removeItem(${index})">❌</button>
+      </div>
+    `;
+  });
+
+  count.innerText = cart.length;
+  total.innerText = sum;
+}
+
+// REMOVE ITEM
+function removeItem(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+// TOGGLE CART
+function toggleCart() {
+  let cartBox = document.getElementById("cart");
+  cartBox.style.display = cartBox.style.display === "none" ? "block" : "none";
+}
+
+// CHECKOUT
+function checkout() {
+  let phone = prompt("Enter M-Pesa number:");
+  if (phone) {
+    alert("Payment request sent to " + phone);
   }
 }
+
 </script>
 
 </body>
 </html>
-
- 
