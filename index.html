@@ -5,46 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Interactable Cut</title>
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #000;
-  color: #fff;
-}
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-}
-button {
-  padding: 15px 30px;
-  background: red;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-}
-.products {
-  display: none;
-  padding: 20px;
-}
-.card {
-  background: #111;
-  padding: 20px;
-  margin: 10px;
-}
-</style>
-</head>
+body {<div id="entry">
 
-<body>
+    <div class="enter" onclick="showPassword()">
+        > ENTER
+    </div>
 
-<div id="landing" class="center">
-  <h1>ACCESS GRANTED</h1>
-  <p>WELCOME TO INTERACTABLE CUT</p>
-  <button onclick="enter()">ENTER STORE</button>
+    <!-- PASSWORD -->
+    <div id="passwordBox">
+        <p>ENTER PASSWORD</p>
+        <input type="password" id="pass">
+        <button onclick="checkPass()">Submit</button>
+    </div>
+
+    <!-- ACCESS -->
+    <div id="access"></div>
+
 </div>
+
+
 
 <div id="store" class="products">
   <h2>Shop</h2>
