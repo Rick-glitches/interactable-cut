@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactable Cut</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+button {
+  padding: 15px 30px;
+  background: red;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+.products {
+  display: none;
+  padding: 20px;
+}
+.card {
+  background: #111;
+  padding: 20px;
+  margin: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="landing" class="center">
+  <h1>ACCESS GRANTED</h1>
+  <p>WELCOME TO INTERACTABLE CUT</p>
+  <button onclick="enter()">ENTER STORE</button>
+</div>
+
+<div id="store" class="products">
+  <h2>Shop</h2>
+
+  <div class="card">
+    <h3>Black Hoodie</h3>
+    <p>KES 2500</p>
+    <button onclick="buy('Hoodie')">Buy</button>
+  </div>
+
+  <div class="card">
+    <h3>White T-Shirt</h3>
+    <p>KES 1500</p>
+    <button onclick="buy('T-Shirt')">Buy</button>
+  </div>
+
+</div>
+
+<script>
+function enter() {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('store').style.display = 'block';
+}
+
+function buy(item) {
+  let phone = prompt("Enter M-Pesa phone number:");
+  if(phone) {
+    alert("Payment request sent to " + phone + " for " + item);
+  }
+}
+</script>
+
+</body>
+</html>
