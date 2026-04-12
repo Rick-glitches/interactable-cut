@@ -1,169 +1,239 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rickson Two Times</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #000;
-  color: #fff;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IRONVOW</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet"><style>
+:root{
+  --bg:#050505; --fg:#eaeaea; --muted:#9aa0a6; --line:#1a1a1a; --accent:#bfc5cc;
 }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Orbitron',sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden}
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
+/* CRT ENTRY */
+#entry{position:fixed;inset:0;display:grid;place-items:center;background:#000;z-index:9999;cursor:pointer}
+#entry .frame{width:min(92vw,520px);aspect-ratio:3/4;border-radius:18px;background:#0b0f14;box-shadow:0 0 0 2px #111, 0 30px 80px rgba(0,0,0,.8) inset, 0 20px 60px rgba(0,0,0,.6);padding:18px;position:relative;overflow:hidden}
+#entry .screen{position:absolute;inset:14px;border-radius:10px;background:radial-gradient(120% 80% at 50% 20%,#0e1a2a, #020406 70%);overflow:hidden}
+#entry .scan{position:absolute;inset:0;background:repeating-linear-gradient(to bottom, rgba(255,255,255,.06) 0 1px, transparent 1px 3px);mix-blend-mode:overlay;pointer-events:none;animation:scan 6s linear infinite}
+@keyframes scan{from{transform:translateY(0)}to{transform:translateY(6px)}}
+#entry .vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, transparent 55%, rgba(0,0,0,.8) 100%)}
+#entry .txt{position:absolute;inset:0;display:grid;place-items:center;text-align:center;gap:12px}
+#entry h1{font-size:18px;letter-spacing:3px;color:#dfe6ee}
+#entry p{font-size:12px;color:#9fb2c7;opacity:.8}
+#entry .glow{color:#cfd6df;text-shadow:0 0 8px rgba(255,255,255,.2)}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(5,5,5,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:2px}
+.logo svg{width:28px;height:28px}
+nav{display:flex;gap:14px;align-items:center}
+nav a{color:var(--fg);text-decoration:none;font-size:12px;opacity:.85}
+nav a:hover{opacity:1}
+.badge{border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;place-items:center;padding-top:80px;position:relative}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 20%, rgba(255,255,255,.06), transparent 60%)}
+.hero h1{font-size:56px;letter-spacing:4px}
+.hero p{color:var(--muted);margin-top:8px}
+.cta{margin-top:18px;display:flex;gap:10px;justify-content:center}
+.btn{border:1px solid var(--fg);background:transparent;color:var(--fg);padding:10px 16px;cursor:pointer}
+.btn.primary{background:var(--fg);color:#000}
+.btn:hover{opacity:.9;transform:translateY(-1px)}
+
+/* GRID */
+.section{padding:60px 18px}
+.section h2{font-size:18px;letter-spacing:2px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.card{border:1px solid var(--line);padding:10px;border-radius:10px;transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:#2a2a2a;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px}
+.price{color:#cfd6df;margin-top:6px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px}
+.small{font-size:12px;color:var(--muted)}
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;place-items:center;z-index:100}
+.modal .box{width:min(92vw,520px);background:#0a0a0a;border:1px solid var(--line);border-radius:14px;padding:16px}
+.modal .box h3{margin-bottom:10px}
+.close{float:right;cursor:pointer;opacity:.7}
+
+/* FOOTER */
+footer{padding:30px 18px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
+
+/* UTIL */
+.spacer{height:10px}
+.hidden{display:none}
+
+@media (max-width:480px){
+  .hero h1{font-size:36px}
 }
-
-button {
-  padding: 12px 20px;
-  background: red;
-  border: none;
-  color: white;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.products {
-  display: none;
-  padding: 20px;
-}
-
-.card {
-  background: #111;
-  padding: 15px;
-  margin: 10px 0;
-}
-</style>
-</head>
-
-<body>
-
-<!-- LANDING -->
-<div id="landing" class="center">
-  <h1>ACCESS GRANTED</h1>
-  <p>WELCOME TO MY STORE</p>
-  <button onclick="enter()">ENTER STORE</button>
-</div>
-
-<!-- STORE -->
-<div id="store" class="products">
-  <h2>Shop</h2>
-
-  <button onclick="toggleCart()" style="background:#222;">
-    🛒 View Cart (<span id="cart-count">0</span>)
-  </button>
-
-  <!-- PRODUCTS -->
-  <div class="card">
-    <h3>Black Hoodie</h3>
-    <p>KES 2500</p>
-    <button onclick="addToCart('Black Hoodie', 2500)">Add to Cart</button>
+</style></head>
+<body><!-- ENTRY --><div id="entry" onclick="enterSite()">
+  <div class="frame">
+    <div class="screen"></div>
+    <div class="scan"></div>
+    <div class="vignette"></div>
+    <div class="txt">
+      <h1 class="glow">&gt; ENTER THE STORE</h1>
+      <p>IRONVOW // secure channel</p>
+    </div>
   </div>
-
-  <div class="card">
-    <h3>White T-Shirt</h3>
-    <p>KES 1500</p>
-    <button onclick="addToCart('White T-Shirt', 1500)">Add to Cart</button>
+</div><!-- MAIN --><div id="main" class="hidden">
+  <header>
+    <div class="logo">
+      <!-- crossed swords svg -->
+      <svg viewBox="0 0 64 64" fill="none" stroke="#eaeaea" stroke-width="3">
+        <path d="M10 54 L30 34"/><path d="M34 30 L54 10"/>
+        <path d="M54 54 L34 34"/><path d="M30 30 L10 10"/>
+      </svg>
+      IRONVOW
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#collections">Collections</a>
+      <a href="#about">About</a>
+      <a href="#" class="badge" id="cartBtn">Cart (0)</a>
+    </nav>
+  </header>  <section class="hero">
+    <div>
+      <h1>IRONVOW</h1>
+      <p>Forged in Discipline</p>
+      <div class="cta">
+        <button class="btn primary" onclick="scrollToShop()">Shop Now</button>
+        <button class="btn" onclick="openCollections()">View Collections</button>
+      </div>
+    </div>
+  </section>  <section class="section" id="shop">
+    <div class="row"><h2>FEATURED</h2>
+      <div>
+        <button class="btn" onclick="setCurrency('KES')">KES</button>
+        <button class="btn" onclick="setCurrency('USD')">USD</button>
+      </div>
+    </div>
+    <div class="grid" id="productGrid"></div>
+  </section>  <section class="section" id="collections">
+    <h2>COLLECTIONS</h2>
+    <div class="grid">
+      <div class="card"><div class="small">Streetwear</div></div>
+      <div class="card"><div class="small">Minimal Core</div></div>
+      <div class="card"><div class="small">Combat Fit</div></div>
+    </div>
+  </section>  <section class="section" id="about">
+    <h2>ABOUT</h2>
+    <p class="small">IRONVOW is built on discipline, restraint, and presence. Every piece is minimal, durable, and intentional.</p>
+  </section>  <footer>© 2026 IRONVOW</footer>
+</div><!-- CART MODAL --><div class="modal" id="cartModal">
+  <div class="box">
+    <span class="close" onclick="toggleCart(false)">✕</span>
+    <h3>Cart</h3>
+    <div id="cartItems"></div>
+    <div class="spacer"></div>
+    <div class="row">
+      <strong>Total:</strong>
+      <strong id="total">0</strong>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn primary" onclick="checkout()">Checkout (Demo)</button>
   </div>
-
-  <div class="card">
-    <h3>Oversized Hoodie</h3>
-    <p>KES 3000</p>
-    <button onclick="addToCart('Oversized Hoodie', 3000)">Add to Cart</button>
-  </div>
-
-  <div class="card">
-    <h3>Premium Cap</h3>
-    <p>KES 1200</p>
-    <button onclick="addToCart('Cap', 1200)">Add to Cart</button>
-  </div>
-
-  <div class="card">
-    <h3>Graphic Tee</h3>
-    <p>KES 1800</p>
-    <button onclick="addToCart('Graphic Tee', 1800)">Add to Cart</button>
-  </div>
-
-  <!-- CART -->
-  <div id="cart" style="display:none; background:#111; padding:15px; margin-top:20px;">
-    <h3>Your Cart</h3>
-    <div id="cart-items"></div>
-    <p>Total: KES <span id="cart-total">0</span></p>
-
-    <button onclick="checkout()">Checkout</button>
-    <button onclick="toggleCart()" style="background:gray;">Close</button>
-  </div>
-</div>
-
-<script>
+</div><script>
+// DATA
+const products = [
+  {id:1, name:'Iron Tee', priceKES:2500, img:'https://picsum.photos/400?1'},
+  {id:2, name:'Shadow Hoodie', priceKES:4500, img:'https://picsum.photos/400?2'},
+  {id:3, name:'Combat Jacket', priceKES:7000, img:'https://picsum.photos/400?3'},
+  {id:4, name:'Void Pants', priceKES:5200, img:'https://picsum.photos/400?4'}
+];
 
 let cart = [];
+let currency = 'KES';
+const rate = 130; // ~ KES per USD (editable)
 
-// ENTER STORE
-function enter() {
-  document.getElementById('landing').style.display = 'none';
-  document.getElementById('store').style.display = 'block';
+// INIT
+function enterSite(){
+  document.getElementById('entry').style.display='none';
+  const m=document.getElementById('main'); m.classList.remove('hidden');
+  renderProducts();
 }
 
-// ADD TO CART
-function addToCart(name, price) {
-  cart.push({ name, price });
-  updateCart();
-  alert(name + " added to cart");
+function scrollToShop(){ document.getElementById('shop').scrollIntoView({behavior:'smooth'}); }
+function openCollections(){ document.getElementById('collections').scrollIntoView({behavior:'smooth'}); }
+
+// PRODUCTS
+function formatPrice(kes){
+  if(currency==='KES') return 'KES ' + kes.toLocaleString();
+  return '$' + (kes/rate).toFixed(2);
 }
 
-// UPDATE CART UI
-function updateCart() {
-  let items = document.getElementById("cart-items");
-  let count = document.getElementById("cart-count");
-  let total = document.getElementById("cart-total");
-
-  items.innerHTML = "";
-  let sum = 0;
-
-  cart.forEach((item, index) => {
-    sum += item.price;
-
-    items.innerHTML += `
-      <div>
-        ${item.name} - KES ${item.price}
-        <button onclick="removeItem(${index})">❌</button>
+function renderProducts(){
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = products.map(p=>`
+    <div class="card">
+      <img src="${p.img}" alt="${p.name}"/>
+      <div class="row">
+        <strong>${p.name}</strong>
+        <span class="small">${formatPrice(p.priceKES)}</span>
       </div>
-    `;
-  });
-
-  count.innerText = cart.length;
-  total.innerText = sum;
+      <div class="row">
+        <select id="size-${p.id}">
+          <option>S</option><option>M</option><option>L</option><option>XL</option>
+        </select>
+        <button class="btn" onclick="addToCart(${p.id})">Add</button>
+      </div>
+    </div>
+  `).join('');
 }
 
-// REMOVE ITEM
-function removeItem(index) {
-  cart.splice(index, 1);
-  updateCart();
+function setCurrency(c){ currency=c; renderProducts(); renderCart(); }
+
+// CART
+function addToCart(id){
+  const p = products.find(x=>x.id===id);
+  const size = document.getElementById('size-'+id).value;
+  cart.push({...p, size});
+  updateCartBadge();
 }
 
-// TOGGLE CART
-function toggleCart() {
-  let cartBox = document.getElementById("cart");
-  cartBox.style.display = cartBox.style.display === "none" ? "block" : "none";
+function updateCartBadge(){
+  document.getElementById('cartBtn').innerText = `Cart (${cart.length})`;
 }
 
-// CHECKOUT
-function checkout() {
-  let phone = prompt("Enter M-Pesa number:");
-  if (phone) {
-    alert("Payment request sent to " + phone);
-  }
+function toggleCart(show=true){
+  const m=document.getElementById('cartModal');
+  m.style.display = show?'grid':'none';
+  if(show) renderCart();
 }
 
-</script>
+document.getElementById('cartBtn').onclick = ()=>toggleCart(true);
 
-</body>
+function renderCart(){
+  const box = document.getElementById('cartItems');
+  if(cart.length===0){ box.innerHTML = '<p class="small">Empty</p>'; document.getElementById('total').innerText='0'; return; }
+  box.innerHTML = cart.map((i,idx)=>`
+    <div class="row">
+      <div>
+        <div>${i.name}</div>
+        <div class="small">Size ${i.size}</div>
+      </div>
+      <div class="row">
+        <span>${formatPrice(i.priceKES)}</span>
+        <button class="btn" onclick="removeItem(${idx})">✕</button>
+      </div>
+    </div>
+  `).join('');
+  const totalKES = cart.reduce((s,i)=>s+i.priceKES,0);
+  document.getElementById('total').innerText = formatPrice(totalKES);
+}
+
+function removeItem(i){ cart.splice(i,1); updateCartBadge(); renderCart(); }
+
+function checkout(){ alert('Demo checkout. Integrate PayPal/Stripe/M-Pesa next.'); }
+
+// UX
+window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') toggleCart(false); });
+</script></body>
 </html>
+
