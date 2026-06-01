@@ -1,239 +1,293 @@
-
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>IRONVOW</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet"><style>
-:root{
-  --bg:#050505; --fg:#eaeaea; --muted:#9aa0a6; --line:#1a1a1a; --accent:#bfc5cc;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{font-family:'Orbitron',sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luxury Auto Market</title>
 
-/* CRT ENTRY */
-#entry{position:fixed;inset:0;display:grid;place-items:center;background:#000;z-index:9999;cursor:pointer}
-#entry .frame{width:min(92vw,520px);aspect-ratio:3/4;border-radius:18px;background:#0b0f14;box-shadow:0 0 0 2px #111, 0 30px 80px rgba(0,0,0,.8) inset, 0 20px 60px rgba(0,0,0,.6);padding:18px;position:relative;overflow:hidden}
-#entry .screen{position:absolute;inset:14px;border-radius:10px;background:radial-gradient(120% 80% at 50% 20%,#0e1a2a, #020406 70%);overflow:hidden}
-#entry .scan{position:absolute;inset:0;background:repeating-linear-gradient(to bottom, rgba(255,255,255,.06) 0 1px, transparent 1px 3px);mix-blend-mode:overlay;pointer-events:none;animation:scan 6s linear infinite}
-@keyframes scan{from{transform:translateY(0)}to{transform:translateY(6px)}}
-#entry .vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, transparent 55%, rgba(0,0,0,.8) 100%)}
-#entry .txt{position:absolute;inset:0;display:grid;place-items:center;text-align:center;gap:12px}
-#entry h1{font-size:18px;letter-spacing:3px;color:#dfe6ee}
-#entry p{font-size:12px;color:#9fb2c7;opacity:.8}
-#entry .glow{color:#cfd6df;text-shadow:0 0 8px rgba(255,255,255,.2)}
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-/* NAV */
-header{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(5,5,5,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:2px}
-.logo svg{width:28px;height:28px}
-nav{display:flex;gap:14px;align-items:center}
-nav a{color:var(--fg);text-decoration:none;font-size:12px;opacity:.85}
-nav a:hover{opacity:1}
-.badge{border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+  <style>
+    body{
+      background:#09090b;
+      font-family:Arial, sans-serif;
+    }
 
-/* HERO */
-.hero{min-height:100vh;display:grid;place-items:center;padding-top:80px;position:relative}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 20%, rgba(255,255,255,.06), transparent 60%)}
-.hero h1{font-size:56px;letter-spacing:4px}
-.hero p{color:var(--muted);margin-top:8px}
-.cta{margin-top:18px;display:flex;gap:10px;justify-content:center}
-.btn{border:1px solid var(--fg);background:transparent;color:var(--fg);padding:10px 16px;cursor:pointer}
-.btn.primary{background:var(--fg);color:#000}
-.btn:hover{opacity:.9;transform:translateY(-1px)}
+    .car-card:hover img{
+      transform:scale(1.05);
+    }
 
-/* GRID */
-.section{padding:60px 18px}
-.section h2{font-size:18px;letter-spacing:2px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
-.card{border:1px solid var(--line);padding:10px;border-radius:10px;transition:.25s}
-.card:hover{transform:translateY(-4px);border-color:#2a2a2a;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px}
-.price{color:#cfd6df;margin-top:6px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px}
-.small{font-size:12px;color:var(--muted)}
+    .car-image{
+      transition:0.4s ease;
+    }
+  </style>
+</head>
 
-/* MODAL */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;place-items:center;z-index:100}
-.modal .box{width:min(92vw,520px);background:#0a0a0a;border:1px solid var(--line);border-radius:14px;padding:16px}
-.modal .box h3{margin-bottom:10px}
-.close{float:right;cursor:pointer;opacity:.7}
+<body class="text-white">
 
-/* FOOTER */
-footer{padding:30px 18px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
+  <!-- Navbar -->
+  <nav class="border-b border-zinc-800 bg-zinc-900 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <div class="flex items-center gap-3">
+        <div class="bg-orange-500 p-2 rounded-xl">
+          🚗
+        </div>
 
-/* UTIL */
-.spacer{height:10px}
-.hidden{display:none}
-
-@media (max-width:480px){
-  .hero h1{font-size:36px}
-}
-</style></head>
-<body><!-- ENTRY --><div id="entry" onclick="enterSite()">
-  <div class="frame">
-    <div class="screen"></div>
-    <div class="scan"></div>
-    <div class="vignette"></div>
-    <div class="txt">
-      <h1 class="glow">&gt; ENTER THE STORE</h1>
-      <p>IRONVOW // secure channel</p>
-    </div>
-  </div>
-</div><!-- MAIN --><div id="main" class="hidden">
-  <header>
-    <div class="logo">
-      <!-- crossed swords svg -->
-      <svg viewBox="0 0 64 64" fill="none" stroke="#eaeaea" stroke-width="3">
-        <path d="M10 54 L30 34"/><path d="M34 30 L54 10"/>
-        <path d="M54 54 L34 34"/><path d="M30 30 L10 10"/>
-      </svg>
-      IRONVOW
-    </div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#shop">Shop</a>
-      <a href="#collections">Collections</a>
-      <a href="#about">About</a>
-      <a href="#" class="badge" id="cartBtn">Cart (0)</a>
-    </nav>
-  </header>  <section class="hero">
-    <div>
-      <h1>IRONVOW</h1>
-      <p>Forged in Discipline</p>
-      <div class="cta">
-        <button class="btn primary" onclick="scrollToShop()">Shop Now</button>
-        <button class="btn" onclick="openCollections()">View Collections</button>
+        <div>
+          <h1 class="font-bold text-xl">RickAutos</h1>
+          <p class="text-xs text-zinc-400">Luxury Car Marketplace</p>
+        </div>
       </div>
+
+      <button class="bg-orange-500 hover:bg-orange-400 px-5 py-2 rounded-xl font-semibold transition">
+        Sell Car
+      </button>
     </div>
-  </section>  <section class="section" id="shop">
-    <div class="row"><h2>FEATURED</h2>
-      <div>
-        <button class="btn" onclick="setCurrency('KES')">KES</button>
-        <button class="btn" onclick="setCurrency('USD')">USD</button>
-      </div>
-    </div>
-    <div class="grid" id="productGrid"></div>
-  </section>  <section class="section" id="collections">
-    <h2>COLLECTIONS</h2>
-    <div class="grid">
-      <div class="card"><div class="small">Streetwear</div></div>
-      <div class="card"><div class="small">Minimal Core</div></div>
-      <div class="card"><div class="small">Combat Fit</div></div>
-    </div>
-  </section>  <section class="section" id="about">
-    <h2>ABOUT</h2>
-    <p class="small">IRONVOW is built on discipline, restraint, and presence. Every piece is minimal, durable, and intentional.</p>
-  </section>  <footer>© 2026 IRONVOW</footer>
-</div><!-- CART MODAL --><div class="modal" id="cartModal">
-  <div class="box">
-    <span class="close" onclick="toggleCart(false)">✕</span>
-    <h3>Cart</h3>
-    <div id="cartItems"></div>
-    <div class="spacer"></div>
-    <div class="row">
-      <strong>Total:</strong>
-      <strong id="total">0</strong>
-    </div>
-    <div class="spacer"></div>
-    <button class="btn primary" onclick="checkout()">Checkout (Demo)</button>
-  </div>
-</div><script>
-// DATA
-const products = [
-  {id:1, name:'Iron Tee', priceKES:2500, img:'https://picsum.photos/400?1'},
-  {id:2, name:'Shadow Hoodie', priceKES:4500, img:'https://picsum.photos/400?2'},
-  {id:3, name:'Combat Jacket', priceKES:7000, img:'https://picsum.photos/400?3'},
-  {id:4, name:'Void Pants', priceKES:5200, img:'https://picsum.photos/400?4'}
-];
+  </nav>
 
-let cart = [];
-let currency = 'KES';
-const rate = 130; // ~ KES per USD (editable)
+  <!-- Hero Section -->
+  <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto text-center">
 
-// INIT
-function enterSite(){
-  document.getElementById('entry').style.display='none';
-  const m=document.getElementById('main'); m.classList.remove('hidden');
-  renderProducts();
-}
+      <h1 class="text-5xl md:text-6xl font-black mb-6">
+        Find Your
+        <span class="text-orange-500"> Dream Car</span>
+      </h1>
 
-function scrollToShop(){ document.getElementById('shop').scrollIntoView({behavior:'smooth'}); }
-function openCollections(){ document.getElementById('collections').scrollIntoView({behavior:'smooth'}); }
+      <p class="text-zinc-400 max-w-2xl mx-auto text-lg mb-10">
+        Explore premium luxury vehicles from trusted dealers across Kenya.
+      </p>
 
-// PRODUCTS
-function formatPrice(kes){
-  if(currency==='KES') return 'KES ' + kes.toLocaleString();
-  return '$' + (kes/rate).toFixed(2);
-}
+      <!-- Search -->
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 max-w-4xl mx-auto grid md:grid-cols-4 gap-4">
 
-function renderProducts(){
-  const grid = document.getElementById('productGrid');
-  grid.innerHTML = products.map(p=>`
-    <div class="card">
-      <img src="${p.img}" alt="${p.name}"/>
-      <div class="row">
-        <strong>${p.name}</strong>
-        <span class="small">${formatPrice(p.priceKES)}</span>
-      </div>
-      <div class="row">
-        <select id="size-${p.id}">
-          <option>S</option><option>M</option><option>L</option><option>XL</option>
+        <input
+          type="text"
+          placeholder="Search cars..."
+          class="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 outline-none focus:border-orange-500"
+        />
+
+        <select class="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3">
+          <option>All Brands</option>
+          <option>Mercedes-Benz</option>
+          <option>BMW</option>
+          <option>Toyota</option>
+          <option>Porsche</option>
         </select>
-        <button class="btn" onclick="addToCart(${p.id})">Add</button>
+
+        <select class="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3">
+          <option>Any Price</option>
+          <option>Under KES 5M</option>
+          <option>Under KES 10M</option>
+          <option>Luxury</option>
+        </select>
+
+        <button class="bg-orange-500 hover:bg-orange-400 rounded-xl font-bold transition">
+          Search
+        </button>
+
       </div>
     </div>
-  `).join('');
-}
+  </section>
 
-function setCurrency(c){ currency=c; renderProducts(); renderCart(); }
+  <!-- Featured Cars -->
+  <section class="px-6 pb-20">
+    <div class="max-w-7xl mx-auto">
 
-// CART
-function addToCart(id){
-  const p = products.find(x=>x.id===id);
-  const size = document.getElementById('size-'+id).value;
-  cart.push({...p, size});
-  updateCartBadge();
-}
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold">
+          Featured Cars
+        </h2>
 
-function updateCartBadge(){
-  document.getElementById('cartBtn').innerText = `Cart (${cart.length})`;
-}
-
-function toggleCart(show=true){
-  const m=document.getElementById('cartModal');
-  m.style.display = show?'grid':'none';
-  if(show) renderCart();
-}
-
-document.getElementById('cartBtn').onclick = ()=>toggleCart(true);
-
-function renderCart(){
-  const box = document.getElementById('cartItems');
-  if(cart.length===0){ box.innerHTML = '<p class="small">Empty</p>'; document.getElementById('total').innerText='0'; return; }
-  box.innerHTML = cart.map((i,idx)=>`
-    <div class="row">
-      <div>
-        <div>${i.name}</div>
-        <div class="small">Size ${i.size}</div>
+        <button class="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-5 py-2 rounded-xl transition">
+          View All
+        </button>
       </div>
-      <div class="row">
-        <span>${formatPrice(i.priceKES)}</span>
-        <button class="btn" onclick="removeItem(${idx})">✕</button>
+
+      <!-- Cars Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Car Card -->
+        <div class="car-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition">
+
+          <div class="relative overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=800&q=80"
+              class="car-image w-full h-56 object-cover"
+            />
+
+            <div class="absolute top-4 left-4">
+              <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                Featured
+              </span>
+            </div>
+          </div>
+
+          <div class="p-5">
+
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="font-bold text-lg">
+                2023 Mercedes-Benz C300
+              </h3>
+
+              <p class="text-orange-400 font-bold">
+                KES 6.8M
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                2023
+              </span>
+
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                8,200 km
+              </span>
+
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                Automatic
+              </span>
+            </div>
+
+            <p class="text-zinc-500 text-sm mb-5">
+              📍 Nairobi, Kenya
+            </p>
+
+            <button class="w-full bg-orange-500 hover:bg-orange-400 py-3 rounded-xl font-semibold transition">
+              View Details
+            </button>
+
+          </div>
+        </div>
+
+        <!-- Car Card -->
+        <div class="car-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition">
+
+          <div class="relative overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80"
+              class="car-image w-full h-56 object-cover"
+            />
+          </div>
+
+          <div class="p-5">
+
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="font-bold text-lg">
+                2022 BMW 530i
+              </h3>
+
+              <p class="text-orange-400 font-bold">
+                KES 5.5M
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                2022
+              </span>
+
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                21,000 km
+              </span>
+
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                Petrol
+              </span>
+            </div>
+
+            <p class="text-zinc-500 text-sm mb-5">
+              📍 Mombasa, Kenya
+            </p>
+
+            <button class="w-full bg-orange-500 hover:bg-orange-400 py-3 rounded-xl font-semibold transition">
+              View Details
+            </button>
+
+          </div>
+        </div>
+
+        <!-- Car Card -->
+        <div class="car-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition">
+
+          <div class="relative overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&q=80"
+              class="car-image w-full h-56 object-cover"
+            />
+          </div>
+
+          <div class="p-5">
+
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="font-bold text-lg">
+                2023 Range Rover Sport
+              </h3>
+
+              <p class="text-orange-400 font-bold">
+                KES 14.5M
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                2023
+              </span>
+
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                5,500 km
+              </span>
+
+              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
+                Luxury SUV
+              </span>
+            </div>
+
+            <p class="text-zinc-500 text-sm mb-5">
+              📍 Nairobi, Kenya
+            </p>
+
+            <button class="w-full bg-orange-500 hover:bg-orange-400 py-3 rounded-xl font-semibold transition">
+              View Details
+            </button>
+
+          </div>
+        </div>
+
       </div>
     </div>
-  `).join('');
-  const totalKES = cart.reduce((s,i)=>s+i.priceKES,0);
-  document.getElementById('total').innerText = formatPrice(totalKES);
-}
+  </section>
 
-function removeItem(i){ cart.splice(i,1); updateCartBadge(); renderCart(); }
+  <!-- Footer -->
+  <footer class="border-t border-zinc-800 py-10 px-6">
+    <div class="max-w-7xl mx-auto text-center">
 
-function checkout(){ alert('Demo checkout. Integrate PayPal/Stripe/M-Pesa next.'); }
+      <h3 class="text-2xl font-bold mb-3">
+        AutoElite Kenya
+      </h3>
 
-// UX
-window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') toggleCart(false); });
-</script></body>
+      <p class="text-zinc-500 mb-6">
+        Premium vehicles. Trusted dealers. Luxury experience.
+      </p>
+
+      <div class="flex justify-center gap-4">
+        <button class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2 rounded-xl transition">
+          Instagram
+        </button>
+
+        <button class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2 rounded-xl transition">
+          Facebook
+        </button>
+
+        <button class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2 rounded-xl transition">
+          WhatsApp
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
 </html>
-
