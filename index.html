@@ -3,291 +3,2126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Luxury Auto Market</title>
+  <meta name="description" content="QedesaAutos — premium vehicles from trusted dealers across Kenya."/>
+  <title>QedesaAuto | Luxury Car Marketplace</title>
 
-  <!-- Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            elite: {
+              50: "#fff7ed",
+              100: "#ffedd5",
+              400: "#fb923c",
+              500: "#f97316",
+              600: "#ea580c",
+              700: "#c2410c"
+            }
+          },
+          boxShadow: {
+            glow: "0 0 40px rgba(249,115,22,.12)"
+          }
+        }
+      }
+    };
+  </script>
+
   <style>
-    body{
-      background:#09090b;
-      font-family:Arial, sans-serif;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .car-card:hover img{
-      transform:scale(1.05);
+    body {
+      background: #070707;
+      font-family: "DM Sans", sans-serif;
+      letter-spacing: -0.01em;
     }
 
-    .car-image{
-      transition:0.4s ease;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    button,
+    .font-black,
+    .font-bold {
+      font-family: "Manrope", sans-serif;
+    }
+
+    .brand-name {
+      font-family: "Manrope", sans-serif;
+      letter-spacing: -0.045em;
+    }
+
+    .brand-tagline {
+      letter-spacing: .08em;
+    }
+
+    ::selection {
+      background: #f97316;
+      color: #fff;
+    }
+
+    .car-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .car-image {
+      transition: transform .45s ease;
+    }
+
+    .glass {
+      background: rgba(24,24,27,.78);
+      backdrop-filter: blur(14px);
+    }
+
+    .modal-backdrop {
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(5px);
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .toast {
+      animation: toastIn .25s ease, toastOut .3s ease 2.7s forwards;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes toastOut {
+      to {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn .3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 
-<body class="text-white">
+<body class="text-[#F5F1E8] min-h-screen">
 
-  <!-- Navbar -->
-  <nav class="border-b border-zinc-800 bg-zinc-900 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      
-      <div class="flex items-center gap-3">
-        <div class="bg-orange-500 p-2 rounded-xl">
-          🚗
+  <!-- NAVBAR -->
+  <nav class="border-b border-[#29251E] bg-[#070707]/95 sticky top-0 z-40 backdrop-blur">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+
+      <a
+        href="#"
+        class="flex items-center gap-3"
+        onclick="scrollToTop(); return false;"
+        aria-label="QedesaAuto home"
+      >
+
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E0C078] via-[#C9A45C] to-[#8F6E32] text-[#070707] flex items-center justify-center shadow-[0_8px_30px_rgba(201,164,92,.18)]">
+
+          <span class="font-black text-lg tracking-[-0.08em]">
+            QA
+          </span>
+
         </div>
 
         <div>
-          <h1 class="font-bold text-xl">RickAutos</h1>
-          <p class="text-xs text-zinc-400">Luxury Car Marketplace</p>
+
+          <h1 class="brand-name font-extrabold text-lg sm:text-xl text-[#F5F1E8]">
+            Qedesa<span class="text-[#C9A45C]">Auto</span>
+          </h1>
+
+          <p class="brand-tagline text-[9px] sm:text-[10px] text-[#8F897F] uppercase">
+            Luxury Automotive
+          </p>
+
         </div>
+
+      </a>
+
+
+      <div class="hidden md:flex items-center gap-7 text-sm text-[#B7B0A4]">
+
+        <a
+          href="#inventory"
+          class="hover:text-[#F5F1E8] transition"
+        >
+          Inventory
+        </a>
+
+        <a
+          href="#why-us"
+          class="hover:text-[#F5F1E8] transition"
+        >
+          Why QedesaAuto
+        </a>
+
+        <a
+          href="#contact"
+          class="hover:text-[#F5F1E8] transition"
+        >
+          Contact
+        </a>
+
       </div>
 
-      <button class="bg-orange-500 hover:bg-orange-400 px-5 py-2 rounded-xl font-semibold transition">
-        Sell Car
-      </button>
+
+      <div class="flex items-center gap-2">
+
+        <button
+          onclick="openFavorites()"
+          class="relative hidden sm:block p-2.5 rounded-xl hover:bg-[#191714] transition"
+          title="Favorites"
+        >
+          ♡
+
+          <span
+            id="favCount"
+            class="absolute -top-1 -right-1 hidden bg-[#C9A45C] text-[10px] min-w-4 h-4 px-1 rounded-full items-center justify-center"
+          >
+            0
+          </span>
+
+        </button>
+
+        <button
+          onclick="openSellModal()"
+          class="bg-[#C9A45C] hover:bg-[#E0C078] px-4 sm:px-5 py-2.5 rounded-xl font-semibold transition"
+        >
+          Sell Car
+        </button>
+
+      </div>
+
     </div>
+
   </nav>
 
-  <!-- Hero Section -->
-  <section class="py-20 px-6">
-    <div class="max-w-7xl mx-auto text-center">
 
-      <h1 class="text-5xl md:text-6xl font-black mb-6">
-        Find Your
-        <span class="text-orange-500"> Dream Car</span>
-      </h1>
+  <!-- HERO -->
+  <section class="relative overflow-hidden border-b border-zinc-900">
 
-      <p class="text-zinc-400 max-w-2xl mx-auto text-lg mb-10">
-        Explore premium luxury vehicles from trusted dealers across Kenya.
-      </p>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(249,115,22,.18),transparent_45%)]"></div>
 
-      <!-- Search -->
-      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 max-w-4xl mx-auto grid md:grid-cols-4 gap-4">
+    <div class="relative py-16 sm:py-20 px-4 sm:px-6">
 
-        <input
-          type="text"
-          placeholder="Search cars..."
-          class="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 outline-none focus:border-orange-500"
-        />
+      <div class="max-w-7xl mx-auto text-center">
 
-        <select class="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3">
-          <option>All Brands</option>
-          <option>Mercedes-Benz</option>
-          <option>BMW</option>
-          <option>Toyota</option>
-          <option>Porsche</option>
-        </select>
+        <div class="inline-flex items-center gap-2 border border-[#29251E] bg-[#11100E]/70 px-3 py-1.5 rounded-full text-xs text-[#D9D2C5] mb-6">
 
-        <select class="bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3">
-          <option>Any Price</option>
-          <option>Under KES 5M</option>
-          <option>Under KES 10M</option>
-          <option>Luxury</option>
-        </select>
+          <span class="w-2 h-2 rounded-full bg-green-500"></span>
 
-        <button class="bg-orange-500 hover:bg-orange-400 rounded-xl font-bold transition">
-          Search
-        </button>
+          Curated luxury vehicles across Kenya
+
+        </div>
+
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-5 tracking-tight">
+
+          Find Your
+
+          <span class="text-[#C9A45C]">
+            Dream Car
+          </span>
+
+        </h1>
+
+
+        <p class="text-[#B7B0A4] max-w-2xl mx-auto text-base sm:text-lg mb-9">
+
+          Discover exceptional vehicles from trusted sellers across Kenya,
+          curated for the modern luxury driver.
+
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="glass border border-[#29251E] rounded-2xl p-3 max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-5 gap-3 shadow-glow">
+
+          <input
+            id="searchInput"
+            oninput="applyFilters()"
+            type="text"
+            placeholder="Search cars, models..."
+            class="bg-[#191714] border border-[#3A3429] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C] text-sm"
+          />
+
+
+          <select
+            id="brandFilter"
+            onchange="applyFilters()"
+            class="bg-[#191714] border border-[#3A3429] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C] text-sm"
+          >
+            <option value="">
+              All Brands
+            </option>
+          </select>
+
+
+          <select
+            id="priceFilter"
+            onchange="applyFilters()"
+            class="bg-[#191714] border border-[#3A3429] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C] text-sm"
+          >
+            <option value="">
+              Any Price
+            </option>
+
+            <option value="5">
+              Under KES 5M
+            </option>
+
+            <option value="10">
+              Under KES 10M
+            </option>
+
+            <option value="15">
+              Under KES 15M
+            </option>
+
+            <option value="20">
+              Under KES 20M
+            </option>
+
+          </select>
+
+
+          <select
+            id="locationFilter"
+            onchange="applyFilters()"
+            class="bg-[#191714] border border-[#3A3429] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C] text-sm"
+          >
+
+            <option value="">
+              All Locations
+            </option>
+
+          </select>
+
+
+          <button
+            onclick="resetFilters()"
+            class="bg-[#C9A45C] hover:bg-[#E0C078] rounded-xl font-bold transition py-3"
+          >
+            Reset
+          </button>
+
+        </div>
+
+
+        <div class="flex justify-center gap-6 mt-6 text-sm text-[#8F897F]">
+
+          <span>
+            <b
+              id="heroCarCount"
+              class="text-[#D9D2C5]"
+            >
+              0
+            </b>
+            vehicles
+          </span>
+
+          <span>
+            <b>47</b>
+            verified dealers
+          </span>
+
+          <span>
+            <b>24/7</b>
+            inquiries
+          </span>
+
+        </div>
 
       </div>
+
     </div>
+
   </section>
 
-  <!-- Featured Cars -->
-  <section class="px-6 pb-20">
+
+  <!-- INVENTORY -->
+
+  <section
+    id="inventory"
+    class="px-4 sm:px-6 py-16"
+  >
+
     <div class="max-w-7xl mx-auto">
 
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="text-3xl font-bold">
-          Featured Cars
-        </h2>
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
 
-        <button class="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-5 py-2 rounded-xl transition">
-          View All
+        <div>
+
+          <p class="text-[#C9A45C] text-sm font-bold uppercase tracking-widest mb-2">
+            Our inventory
+          </p>
+
+          <h2 class="text-3xl sm:text-4xl font-black">
+            Featured Cars
+          </h2>
+
+          <p
+            id="resultText"
+            class="text-[#8F897F] mt-2 text-sm"
+          ></p>
+
+        </div>
+
+
+        <div class="flex items-center gap-2">
+
+          <select
+            id="sortFilter"
+            onchange="applyFilters()"
+            class="bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-2.5 text-sm outline-none"
+          >
+
+            <option value="featured">
+              Sort: Featured
+            </option>
+
+            <option value="priceLow">
+              Price: Low to High
+            </option>
+
+            <option value="priceHigh">
+              Price: High to Low
+            </option>
+
+            <option value="year">
+              Newest Year
+            </option>
+
+            <option value="mileage">
+              Lowest Mileage
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="carGrid"
+        class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      ></div>
+
+
+      <div
+        id="emptyState"
+        class="hidden text-center py-20 border border-dashed border-[#29251E] rounded-2xl"
+      >
+
+        <div class="text-5xl mb-4">
+          🔎
+        </div>
+
+        <h3 class="text-xl font-bold mb-2">
+          No cars found
+        </h3>
+
+        <p class="text-[#8F897F] mb-6">
+          Try changing your search or filters.
+        </p>
+
+        <button
+          onclick="resetFilters()"
+          class="bg-[#C9A45C] hover:bg-[#E0C078] px-5 py-2.5 rounded-xl font-semibold"
+        >
+          Clear Filters
         </button>
-      </div>
-
-      <!-- Cars Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- Car Card -->
-        <div class="car-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition">
-
-          <div class="relative overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=800&q=80"
-              class="car-image w-full h-56 object-cover"
-            />
-
-            <div class="absolute top-4 left-4">
-              <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                Featured
-              </span>
-            </div>
-          </div>
-
-          <div class="p-5">
-
-            <div class="flex justify-between items-start mb-3">
-              <h3 class="font-bold text-lg">
-                2023 Mercedes-Benz C300
-              </h3>
-
-              <p class="text-orange-400 font-bold">
-                KES 6.8M
-              </p>
-            </div>
-
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                2023
-              </span>
-
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                8,200 km
-              </span>
-
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                Automatic
-              </span>
-            </div>
-
-            <p class="text-zinc-500 text-sm mb-5">
-              📍 Nairobi, Kenya
-            </p>
-
-            <button class="w-full bg-orange-500 hover:bg-orange-400 py-3 rounded-xl font-semibold transition">
-              View Details
-            </button>
-
-          </div>
-        </div>
-
-        <!-- Car Card -->
-        <div class="car-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition">
-
-          <div class="relative overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80"
-              class="car-image w-full h-56 object-cover"
-            />
-          </div>
-
-          <div class="p-5">
-
-            <div class="flex justify-between items-start mb-3">
-              <h3 class="font-bold text-lg">
-                2022 BMW 530i
-              </h3>
-
-              <p class="text-orange-400 font-bold">
-                KES 5.5M
-              </p>
-            </div>
-
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                2022
-              </span>
-
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                21,000 km
-              </span>
-
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                Petrol
-              </span>
-            </div>
-
-            <p class="text-zinc-500 text-sm mb-5">
-              📍 Mombasa, Kenya
-            </p>
-
-            <button class="w-full bg-orange-500 hover:bg-orange-400 py-3 rounded-xl font-semibold transition">
-              View Details
-            </button>
-
-          </div>
-        </div>
-
-        <!-- Car Card -->
-        <div class="car-card bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-600 transition">
-
-          <div class="relative overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&q=80"
-              class="car-image w-full h-56 object-cover"
-            />
-          </div>
-
-          <div class="p-5">
-
-            <div class="flex justify-between items-start mb-3">
-              <h3 class="font-bold text-lg">
-                2023 Range Rover Sport
-              </h3>
-
-              <p class="text-orange-400 font-bold">
-                KES 14.5M
-              </p>
-            </div>
-
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                2023
-              </span>
-
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                5,500 km
-              </span>
-
-              <span class="bg-zinc-800 text-zinc-400 text-xs px-3 py-1 rounded-full">
-                Luxury SUV
-              </span>
-            </div>
-
-            <p class="text-zinc-500 text-sm mb-5">
-              📍 Nairobi, Kenya
-            </p>
-
-            <button class="w-full bg-orange-500 hover:bg-orange-400 py-3 rounded-xl font-semibold transition">
-              View Details
-            </button>
-
-          </div>
-        </div>
 
       </div>
+
     </div>
+
   </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-zinc-800 py-10 px-6">
-    <div class="max-w-7xl mx-auto text-center">
 
-      <h3 class="text-2xl font-bold mb-3">
-        AutoElite Kenya
-      </h3>
+  <!-- WHY US -->
 
-      <p class="text-zinc-500 mb-6">
-        Premium vehicles. Trusted dealers. Luxury experience.
-      </p>
+  <section
+    id="why-us"
+    class="border-y border-zinc-900 bg-[#070707] px-4 sm:px-6 py-16"
+  >
 
-      <div class="flex justify-center gap-4">
-        <button class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2 rounded-xl transition">
-          Instagram
-        </button>
+    <div class="max-w-7xl mx-auto">
 
-        <button class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2 rounded-xl transition">
-          Facebook
-        </button>
+      <div class="text-center max-w-2xl mx-auto mb-10">
 
-        <button class="bg-zinc-800 hover:bg-zinc-700 px-5 py-2 rounded-xl transition">
-          WhatsApp
-        </button>
+        <p class="text-[#C9A45C] text-sm font-bold uppercase tracking-widest mb-2">
+          The QedesaAuto standard
+        </p>
+
+        <h2 class="text-3xl sm:text-4xl font-black">
+          Buy with confidence
+        </h2>
+
+        <p class="text-[#8F897F] mt-3">
+          A premium marketplace experience without the usual uncertainty.
+        </p>
+
+      </div>
+
+
+      <div class="grid md:grid-cols-3 gap-5">
+
+
+        <div class="bg-[#11100E] border border-[#29251E] rounded-2xl p-6">
+
+          <div class="w-11 h-11 rounded-xl bg-[#C9A45C]/10 text-[#C9A45C] flex items-center justify-center text-xl mb-5">
+            ✓
+          </div>
+
+          <h3 class="font-bold text-lg mb-2">
+            Verified listings
+          </h3>
+
+          <p class="text-[#8F897F] text-sm leading-6">
+            We structure listings around clear vehicle details,
+            seller information and location.
+          </p>
+
+        </div>
+
+
+        <div class="bg-[#11100E] border border-[#29251E] rounded-2xl p-6">
+
+          <div class="w-11 h-11 rounded-xl bg-[#C9A45C]/10 text-[#C9A45C] flex items-center justify-center text-xl mb-5">
+            ◆
+          </div>
+
+          <h3 class="font-bold text-lg mb-2">
+            Premium inventory
+          </h3>
+
+          <p class="text-[#8F897F] text-sm leading-6">
+            Browse executive sedans, performance cars and luxury SUVs
+            in one marketplace.
+          </p>
+
+        </div>
+
+
+        <div class="bg-[#11100E] border border-[#29251E] rounded-2xl p-6">
+
+          <div class="w-11 h-11 rounded-xl bg-[#C9A45C]/10 text-[#C9A45C] flex items-center justify-center text-xl mb-5">
+            ↗
+          </div>
+
+          <h3 class="font-bold text-lg mb-2">
+            Direct inquiries
+          </h3>
+
+          <p class="text-[#8F897F] text-sm leading-6">
+            Open a listing, review its details and contact the seller
+            directly through WhatsApp.
+          </p>
+
+        </div>
+
       </div>
 
     </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="px-4 sm:px-6 py-16">
+
+    <div class="max-w-7xl mx-auto bg-gradient-to-br from-zinc-900 to-zinc-950 border border-[#29251E] rounded-3xl p-8 sm:p-12 text-center">
+
+      <p class="text-[#C9A45C] text-sm font-bold uppercase tracking-widest mb-3">
+        Selling your vehicle?
+      </p>
+
+      <h2 class="text-3xl sm:text-4xl font-black mb-4">
+        Put your car in front of serious buyers.
+      </h2>
+
+      <p class="text-[#8F897F] max-w-xl mx-auto mb-7">
+        Create a listing in seconds. Your listing is stored locally in
+        this frontend demo and appears immediately in the inventory.
+      </p>
+
+      <button
+        onclick="openSellModal()"
+        class="bg-[#C9A45C] hover:bg-[#E0C078] px-7 py-3 rounded-xl font-bold transition"
+      >
+        List Your Car
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer
+    id="contact"
+    class="border-t border-[#29251E] py-12 px-4 sm:px-6"
+  >
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+
+
+      <div>
+
+        <h3 class="text-2xl font-black mb-2">
+          QedesaAuto
+        </h3>
+
+        <p class="text-[#8F897F] text-sm leading-6">
+          Premium vehicles. Trusted dealers. Luxury experience.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4 class="font-bold mb-3">
+          Marketplace
+        </h4>
+
+        <div class="space-y-2 text-sm text-[#8F897F]">
+
+          <a
+            href="#inventory"
+            class="block hover:text-[#F5F1E8]"
+          >
+            Browse inventory
+          </a>
+
+          <button
+            onclick="openFavorites()"
+            class="hover:text-[#F5F1E8]"
+          >
+            My favorites
+          </button>
+
+          <button
+            onclick="openSellModal()"
+            class="block hover:text-[#F5F1E8]"
+          >
+            Sell a car
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <h4 class="font-bold mb-3">
+          Connect
+        </h4>
+
+        <div class="flex flex-wrap gap-2">
+
+          <button
+            onclick="toast('Instagram link ready to connect.')"
+            class="bg-[#191714] hover:bg-[#2A251E] px-4 py-2 rounded-xl text-sm"
+          >
+            Instagram
+          </button>
+
+          <button
+            onclick="toast('Facebook link ready to connect.')"
+            class="bg-[#191714] hover:bg-[#2A251E] px-4 py-2 rounded-xl text-sm"
+          >
+            Facebook
+          </button>
+
+          <button
+            onclick="contactWhatsApp('QedesaAuto')"
+            class="bg-[#191714] hover:bg-[#2A251E] px-4 py-2 rounded-xl text-sm"
+          >
+            WhatsApp
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="max-w-7xl mx-auto border-t border-zinc-900 mt-10 pt-6 text-xs text-[#69645C] flex flex-col sm:flex-row justify-between gap-2">
+
+      <span>
+        © 2026 QedesaAuto. Frontend demo.
+      </span>
+
+      <span>
+        Built with HTML + Tailwind CSS + JavaScript.
+      </span>
+
+    </div>
+
   </footer>
+
+
+  <!-- CAR DETAILS MODAL -->
+
+  <div
+    id="detailsModal"
+    class="hidden fixed inset-0 z-50 modal-backdrop p-4 overflow-y-auto"
+  >
+
+    <div class="min-h-full flex items-center justify-center py-8">
+
+      <div class="w-full max-w-4xl bg-[#070707] border border-[#29251E] rounded-3xl overflow-hidden shadow-2xl fade-in">
+
+        <div class="relative">
+
+          <img
+            id="modalImage"
+            src=""
+            alt=""
+            class="w-full h-64 sm:h-80 object-cover"
+          />
+
+          <button
+            onclick="closeModal('detailsModal')"
+            class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-[#F5F1E8] text-xl"
+          >
+            ×
+          </button>
+
+          <span
+            id="modalBadge"
+            class="absolute top-4 left-4 bg-[#C9A45C] px-3 py-1 rounded-full text-xs font-bold"
+          ></span>
+
+        </div>
+
+
+        <div class="p-6 sm:p-8">
+
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
+
+            <div>
+
+              <p
+                id="modalLocation"
+                class="text-[#8F897F] text-sm mb-2"
+              ></p>
+
+              <h2
+                id="modalTitle"
+                class="text-2xl sm:text-3xl font-black"
+              ></h2>
+
+            </div>
+
+            <p
+              id="modalPrice"
+              class="text-[#D7B66D] font-black text-2xl"
+            ></p>
+
+          </div>
+
+
+          <div
+            id="modalSpecs"
+            class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7"
+          ></div>
+
+
+          <p
+            id="modalDescription"
+            class="text-[#B7B0A4] leading-7 mb-7"
+          ></p>
+
+
+          <div class="flex flex-col sm:flex-row gap-3">
+
+            <button
+              id="modalFavBtn"
+              class="border border-[#3A3429] hover:border-[#C9A45C] px-5 py-3 rounded-xl font-semibold transition"
+            ></button>
+
+            <button
+              id="modalWhatsapp"
+              class="flex-1 bg-[#C9A45C] hover:bg-[#E0C078] px-5 py-3 rounded-xl font-bold transition"
+            >
+              Chat on WhatsApp
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SELL MODAL -->
+
+  <div
+    id="sellModal"
+    class="hidden fixed inset-0 z-50 modal-backdrop p-4 overflow-y-auto"
+  >
+
+    <div class="min-h-full flex items-center justify-center py-8">
+
+      <div class="w-full max-w-2xl bg-[#070707] border border-[#29251E] rounded-3xl p-6 sm:p-8 fade-in">
+
+        <div class="flex justify-between items-start mb-7">
+
+          <div>
+
+            <p class="text-[#C9A45C] text-sm font-bold uppercase tracking-widest">
+              Seller portal
+            </p>
+
+            <h2 class="text-2xl font-black mt-1">
+              List Your Car
+            </h2>
+
+          </div>
+
+          <button
+            onclick="closeModal('sellModal')"
+            class="w-10 h-10 rounded-full bg-[#11100E] hover:bg-[#191714] text-xl"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <form
+          id="sellForm"
+          class="grid sm:grid-cols-2 gap-4"
+        >
+
+          <input
+            name="title"
+            required
+            placeholder="Car name e.g. 2021 Audi Q7"
+            class="sm:col-span-2 bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          />
+
+
+          <input
+            name="brand"
+            required
+            placeholder="Brand e.g. Audi"
+            class="bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          />
+
+
+          <input
+            name="year"
+            required
+            type="number"
+            min="1980"
+            max="2026"
+            placeholder="Year"
+            class="bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          />
+
+
+          <input
+            name="price"
+            required
+            type="number"
+            min="1"
+            placeholder="Price in KES"
+            class="bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          />
+
+
+          <input
+            name="mileage"
+            required
+            type="number"
+            min="0"
+            placeholder="Mileage (km)"
+            class="bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          />
+
+
+          <select
+            name="fuel"
+            required
+            class="bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          >
+
+            <option value="">
+              Fuel type
+            </option>
+
+            <option>
+              Petrol
+            </option>
+
+            <option>
+              Diesel
+            </option>
+
+            <option>
+              Hybrid
+            </option>
+
+            <option>
+              Electric
+            </option>
+
+          </select>
+
+
+          <select
+            name="transmission"
+            required
+            class="bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          >
+
+            <option value="">
+              Transmission
+            </option>
+
+            <option>
+              Automatic
+            </option>
+
+            <option>
+              Manual
+            </option>
+
+          </select>
+
+
+          <input
+            name="location"
+            required
+            placeholder="Location e.g. Nairobi"
+            class="bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          />
+
+
+          <input
+            name="image"
+            placeholder="Image URL (optional)"
+            class="sm:col-span-2 bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          />
+
+
+          <textarea
+            name="description"
+            rows="3"
+            placeholder="Short description"
+            class="sm:col-span-2 bg-[#11100E] border border-[#29251E] rounded-xl px-4 py-3 outline-none focus:border-[#C9A45C]"
+          ></textarea>
+
+
+          <button
+            type="submit"
+            class="sm:col-span-2 bg-[#C9A45C] hover:bg-[#E0C078] py-3 rounded-xl font-bold transition"
+          >
+            Publish Listing
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FAVORITES MODAL -->
+
+  <div
+    id="favoritesModal"
+    class="hidden fixed inset-0 z-50 modal-backdrop p-4 overflow-y-auto"
+  >
+
+    <div class="min-h-full flex items-center justify-center py-8">
+
+      <div class="w-full max-w-2xl bg-[#070707] border border-[#29251E] rounded-3xl p-6 sm:p-8 fade-in">
+
+        <div class="flex justify-between items-center mb-6">
+
+          <div>
+
+            <p class="text-[#C9A45C] text-sm font-bold uppercase tracking-widest">
+              Saved cars
+            </p>
+
+            <h2 class="text-2xl font-black">
+              My Favorites
+            </h2>
+
+          </div>
+
+          <button
+            onclick="closeModal('favoritesModal')"
+            class="w-10 h-10 rounded-full bg-[#11100E] hover:bg-[#191714] text-xl"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <div id="favoritesList"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div
+    id="toastContainer"
+    class="fixed bottom-5 right-5 z-[70] space-y-2"
+  ></div>
+
+
+<script>
+
+const defaultCars = [
+
+  {
+    id:"c300-2023",
+    title:"2023 Mercedes-Benz C300",
+    brand:"Mercedes-Benz",
+    price:6800000,
+    year:2023,
+    mileage:8200,
+    fuel:"Petrol",
+    transmission:"Automatic",
+    location:"Nairobi, Kenya",
+    image:"https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=1200&q=85",
+    badge:"Featured",
+    verified:true,
+    description:"A refined executive sedan with a premium cabin, modern technology and strong everyday performance. Listed in Nairobi."
+  },
+
+  {
+    id:"bmw-530i-2022",
+    title:"2022 BMW 530i",
+    brand:"BMW",
+    price:5500000,
+    year:2022,
+    mileage:21000,
+    fuel:"Petrol",
+    transmission:"Automatic",
+    location:"Mombasa, Kenya",
+    image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?w=1200&q=85",
+    badge:"",
+    verified:true,
+    description:"A sophisticated BMW 5 Series sedan combining comfort, performance and a premium driving experience."
+  },
+
+  {
+    id:"rr-sport-2023",
+    title:"2023 Range Rover Sport",
+    brand:"Range Rover",
+    price:14500000,
+    year:2023,
+    mileage:5500,
+    fuel:"Petrol",
+    transmission:"Automatic",
+    location:"Nairobi, Kenya",
+    image:"https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=1200&q=85",
+    badge:"Luxury SUV",
+    verified:true,
+    description:"Low-mileage luxury SUV with commanding road presence, premium comfort and modern technology."
+  },
+
+  {
+    id:"porsche-cayenne-2022",
+    title:"2022 Porsche Cayenne",
+    brand:"Porsche",
+    price:11800000,
+    year:2022,
+    mileage:12800,
+    fuel:"Petrol",
+    transmission:"Automatic",
+    location:"Nairobi, Kenya",
+    image:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85",
+    badge:"Performance",
+    verified:true,
+    description:"A performance-focused luxury SUV with a premium interior and Porsche driving dynamics."
+  },
+
+  {
+    id:"toyota-lc300-2024",
+    title:"2024 Toyota Land Cruiser 300",
+    brand:"Toyota",
+    price:18500000,
+    year:2024,
+    mileage:6100,
+    fuel:"Diesel",
+    transmission:"Automatic",
+    location:"Nairobi, Kenya",
+    image:"https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1200&q=85",
+    badge:"Popular",
+    verified:true,
+    description:"Premium flagship SUV designed for long-distance comfort, capability and reliability."
+  },
+
+  {
+    id:"bmw-x5-2023",
+    title:"2023 BMW X5 xDrive40i",
+    brand:"BMW",
+    price:10500000,
+    year:2023,
+    mileage:9700,
+    fuel:"Petrol",
+    transmission:"Automatic",
+    location:"Kiambu, Kenya",
+    image:"https://images.unsplash.com/photo-1556189250-72ba954cfc2b?w=1200&q=85",
+    badge:"Featured",
+    verified:true,
+    description:"Premium midsize SUV with a powerful engine, luxurious cabin and intelligent all-wheel drive."
+  },
+
+  {
+    id:"merc-glc-2022",
+    title:"2022 Mercedes-Benz GLC 300",
+    brand:"Mercedes-Benz",
+    price:8200000,
+    year:2022,
+    mileage:15400,
+    fuel:"Petrol",
+    transmission:"Automatic",
+    location:"Nairobi, Kenya",
+    image:"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1200&q=85",
+    badge:"",
+    verified:true,
+    description:"Elegant and versatile luxury SUV with a refined interior and advanced driver technology."
+  },
+
+  {
+    id:"lexus-rx-2023",
+    title:"2023 Lexus RX 350h",
+    brand:"Lexus",
+    price:9700000,
+    year:2023,
+    mileage:8900,
+    fuel:"Hybrid",
+    transmission:"Automatic",
+    location:"Nairobi, Kenya",
+    image:"https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=1200&q=85",
+    badge:"Hybrid",
+    verified:true,
+    description:"A quiet and efficient premium crossover offering a smooth hybrid powertrain and luxury comfort."
+  },
+
+  {
+    id:"audi-q8-2021",
+    title:"2021 Audi Q8",
+    brand:"Audi",
+    price:8900000,
+    year:2021,
+    mileage:23200,
+    fuel:"Petrol",
+    transmission:"Automatic",
+    location:"Mombasa, Kenya",
+    image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=1200&q=85",
+    badge:"",
+    verified:true,
+    description:"A sleek premium SUV with quattro-inspired confidence, a high-quality cabin and sporty styling."
+  }
+
+];
+
+
+let cars =
+  JSON.parse(localStorage.getItem("autoelite_cars") || "null")
+  || defaultCars;
+
+let favorites =
+  JSON.parse(localStorage.getItem("autoelite_favorites") || "[]");
+
+let activeCarId = null;
+
+
+function money(value) {
+
+  return "KES " +
+    Number(value).toLocaleString("en-KE");
+
+}
+
+
+function compactMoney(value) {
+
+  const m = value / 1000000;
+
+  return "KES " +
+    (m >= 10 ? m.toFixed(1) : m.toFixed(1))
+    + "M";
+
+}
+
+
+function escapeHTML(value) {
+
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    c => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[c])
+  );
+
+}
+
+
+function saveState() {
+
+  localStorage.setItem(
+    "autoelite_cars",
+    JSON.stringify(cars)
+  );
+
+  localStorage.setItem(
+    "autoelite_favorites",
+    JSON.stringify(favorites)
+  );
+
+  updateFavoriteCount();
+
+}
+
+
+function setupFilters() {
+
+  const brands =
+    [...new Set(cars.map(c => c.brand))].sort();
+
+  const locations =
+    [...new Set(cars.map(c => c.location))].sort();
+
+
+  document.getElementById("brandFilter").innerHTML =
+    '<option value="">All Brands</option>' +
+
+    brands
+      .map(
+        b =>
+          `<option value="${escapeHTML(b)}">
+            ${escapeHTML(b)}
+          </option>`
+      )
+      .join("");
+
+
+  document.getElementById("locationFilter").innerHTML =
+    '<option value="">All Locations</option>' +
+
+    locations
+      .map(
+        l =>
+          `<option value="${escapeHTML(l)}">
+            ${escapeHTML(l)}
+          </option>`
+      )
+      .join("");
+
+
+  document.getElementById("heroCarCount").textContent =
+    cars.length;
+
+}
+
+
+function renderCars(list) {
+
+  const grid =
+    document.getElementById("carGrid");
+
+  const empty =
+    document.getElementById("emptyState");
+
+
+  if (!list.length) {
+
+    grid.innerHTML = "";
+
+    empty.classList.remove("hidden");
+
+    return;
+
+  }
+
+
+  empty.classList.add("hidden");
+
+
+  grid.innerHTML = list.map(car => {
+
+    const isFav =
+      favorites.includes(car.id);
+
+
+    return `
+
+      <article
+        class="car-card bg-[#11100E] border border-[#29251E] rounded-2xl overflow-hidden hover:border-zinc-600 transition fade-in"
+      >
+
+        <div class="relative overflow-hidden">
+
+          <img
+            src="${escapeHTML(car.image)}"
+            alt="${escapeHTML(car.title)}"
+            loading="lazy"
+            class="car-image w-full h-56 object-cover bg-[#191714]"
+
+            onerror="
+              this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=80'
+            "
+          />
+
+
+          <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
+
+
+          ${
+            car.badge
+              ?
+              `<span class="absolute top-4 left-4 bg-[#C9A45C] text-[#F5F1E8] text-xs font-bold px-3 py-1 rounded-full">
+                ${escapeHTML(car.badge)}
+              </span>`
+              :
+              ""
+          }
+
+
+          ${
+            car.verified
+              ?
+              `<span class="absolute bottom-3 left-4 text-xs bg-black/60 px-2.5 py-1 rounded-full text-zinc-200">
+                ✓ Verified
+              </span>`
+              :
+              ""
+          }
+
+
+          <button
+            onclick="toggleFavorite('${escapeHTML(car.id)}')"
+            class="absolute top-3 right-3 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center text-xl transition"
+            title="Favorite"
+          >
+            ${isFav ? "♥" : "♡"}
+          </button>
+
+        </div>
+
+
+        <div class="p-5">
+
+          <div class="flex justify-between items-start gap-3 mb-3">
+
+            <h3 class="font-bold text-lg leading-6">
+              ${escapeHTML(car.title)}
+            </h3>
+
+            <p class="text-[#D7B66D] font-bold whitespace-nowrap">
+              ${compactMoney(car.price)}
+            </p>
+
+          </div>
+
+
+          <div class="flex flex-wrap gap-2 mb-4">
+
+            <span class="bg-[#191714] text-[#B7B0A4] text-xs px-3 py-1 rounded-full">
+              ${car.year}
+            </span>
+
+            <span class="bg-[#191714] text-[#B7B0A4] text-xs px-3 py-1 rounded-full">
+              ${Number(car.mileage).toLocaleString()} km
+            </span>
+
+            <span class="bg-[#191714] text-[#B7B0A4] text-xs px-3 py-1 rounded-full">
+              ${escapeHTML(car.transmission)}
+            </span>
+
+          </div>
+
+
+          <p class="text-[#8F897F] text-sm mb-5">
+            📍 ${escapeHTML(car.location)}
+          </p>
+
+
+          <button
+            onclick="openDetails('${escapeHTML(car.id)}')"
+            class="w-full bg-[#C9A45C] hover:bg-[#E0C078] py-3 rounded-xl font-semibold transition"
+          >
+            View Details
+          </button>
+
+        </div>
+
+      </article>
+
+    `;
+
+  }).join("");
+
+}
+
+
+function applyFilters() {
+
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const brand =
+    document.getElementById("brandFilter").value;
+
+
+  const maxPriceM =
+    document.getElementById("priceFilter").value;
+
+
+  const location =
+    document.getElementById("locationFilter").value;
+
+
+  const sort =
+    document.getElementById("sortFilter").value;
+
+
+  let result = cars.filter(car => {
+
+    const searchable =
+      `${car.title}
+       ${car.brand}
+       ${car.location}
+       ${car.fuel}
+       ${car.transmission}`
+      .toLowerCase();
+
+
+    const matchesSearch =
+      !search || searchable.includes(search);
+
+
+    const matchesBrand =
+      !brand || car.brand === brand;
+
+
+    const matchesPrice =
+      !maxPriceM ||
+      car.price < Number(maxPriceM) * 1000000;
+
+
+    const matchesLocation =
+      !location ||
+      car.location === location;
+
+
+    return (
+      matchesSearch &&
+      matchesBrand &&
+      matchesPrice &&
+      matchesLocation
+    );
+
+  });
+
+
+  if (sort === "priceLow") {
+
+    result.sort(
+      (a,b) => a.price - b.price
+    );
+
+  }
+
+
+  if (sort === "priceHigh") {
+
+    result.sort(
+      (a,b) => b.price - a.price
+    );
+
+  }
+
+
+  if (sort === "year") {
+
+    result.sort(
+      (a,b) => b.year - a.year
+    );
+
+  }
+
+
+  if (sort === "mileage") {
+
+    result.sort(
+      (a,b) => a.mileage - b.mileage
+    );
+
+  }
+
+
+  renderCars(result);
+
+
+  document.getElementById("resultText").textContent =
+    `Showing ${result.length} of ${cars.length} vehicles`;
+
+}
+
+
+function resetFilters() {
+
+  document.getElementById("searchInput").value = "";
+
+  document.getElementById("brandFilter").value = "";
+
+  document.getElementById("priceFilter").value = "";
+
+  document.getElementById("locationFilter").value = "";
+
+  document.getElementById("sortFilter").value = "featured";
+
+  applyFilters();
+
+}
+
+
+function openDetails(id) {
+
+  const car =
+    cars.find(c => c.id === id);
+
+  if (!car) return;
+
+
+  activeCarId = id;
+
+
+  document.getElementById("modalImage").src =
+    car.image;
+
+  document.getElementById("modalImage").alt =
+    car.title;
+
+  document.getElementById("modalTitle").textContent =
+    car.title;
+
+  document.getElementById("modalPrice").textContent =
+    money(car.price);
+
+  document.getElementById("modalLocation").textContent =
+    "📍 " + car.location;
+
+  document.getElementById("modalBadge").textContent =
+    car.badge ||
+    (car.verified ? "Verified" : "Vehicle");
+
+  document.getElementById("modalDescription").textContent =
+    car.description ||
+    "Contact the seller for more information.";
+
+
+  document.getElementById("modalSpecs").innerHTML = [
+
+    ["Year", car.year],
+
+    [
+      "Mileage",
+      Number(car.mileage).toLocaleString() + " km"
+    ],
+
+    ["Fuel", car.fuel],
+
+    ["Transmission", car.transmission]
+
+  ]
+
+  .map(
+    ([label,value]) => `
+
+      <div class="bg-[#11100E] border border-[#29251E] rounded-xl p-4">
+
+        <p class="text-xs text-[#8F897F] mb-1">
+          ${label}
+        </p>
+
+        <p class="font-semibold text-sm">
+          ${escapeHTML(value)}
+        </p>
+
+      </div>
+
+    `
+  )
+  .join("");
+
+
+  const favBtn =
+    document.getElementById("modalFavBtn");
+
+
+  favBtn.textContent =
+    favorites.includes(id)
+      ? "♥ Remove Favorite"
+      : "♡ Add to Favorites";
+
+
+  favBtn.onclick = () => {
+
+    toggleFavorite(id);
+
+    favBtn.textContent =
+      favorites.includes(id)
+        ? "♥ Remove Favorite"
+        : "♡ Add to Favorites";
+
+  };
+
+
+  document.getElementById("modalWhatsapp").onclick =
+    () => contactWhatsApp(car.title);
+
+
+  document
+    .getElementById("detailsModal")
+    .classList
+    .remove("hidden");
+
+
+  document.body.classList.add(
+    "overflow-hidden"
+  );
+
+}
+
+
+function openSellModal() {
+
+  document
+    .getElementById("sellModal")
+    .classList
+    .remove("hidden");
+
+  document.body.classList.add(
+    "overflow-hidden"
+  );
+
+}
+
+
+function openFavorites() {
+
+  renderFavorites();
+
+  document
+    .getElementById("favoritesModal")
+    .classList
+    .remove("hidden");
+
+  document.body.classList.add(
+    "overflow-hidden"
+  );
+
+}
+
+
+function renderFavorites() {
+
+  const list =
+    document.getElementById("favoritesList");
+
+
+  const favCars =
+    cars.filter(
+      c => favorites.includes(c.id)
+    );
+
+
+  if (!favCars.length) {
+
+    list.innerHTML = `
+
+      <div class="text-center py-10">
+
+        <div class="text-4xl mb-3">
+          ♡
+        </div>
+
+        <p class="font-semibold mb-1">
+          No favorites yet
+        </p>
+
+        <p class="text-sm text-[#8F897F]">
+          Tap the heart on any car to save it.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML = `
+
+    <div class="space-y-3">
+
+      ${
+        favCars
+          .map(
+            car => `
+
+              <div class="flex gap-3 items-center bg-[#11100E] border border-[#29251E] rounded-2xl p-3">
+
+                <img
+                  src="${escapeHTML(car.image)}"
+                  class="w-24 h-20 object-cover rounded-xl"
+                  alt="${escapeHTML(car.title)}"
+                />
+
+
+                <div class="flex-1 min-w-0">
+
+                  <h3 class="font-bold truncate">
+                    ${escapeHTML(car.title)}
+                  </h3>
+
+                  <p class="text-[#D7B66D] text-sm font-semibold">
+                    ${money(car.price)}
+                  </p>
+
+                  <p class="text-[#8F897F] text-xs">
+                    ${escapeHTML(car.location)}
+                  </p>
+
+                </div>
+
+
+                <div class="flex gap-2">
+
+                  <button
+                    onclick="
+                      closeModal('favoritesModal');
+                      openDetails('${escapeHTML(car.id)}')
+                    "
+                    class="bg-[#C9A45C] px-3 py-2 rounded-xl text-xs font-bold"
+                  >
+                    View
+                  </button>
+
+
+                  <button
+                    onclick="
+                      toggleFavorite('${escapeHTML(car.id)}');
+                      renderFavorites()
+                    "
+                    class="bg-[#191714] px-3 py-2 rounded-xl text-xs"
+                  >
+                    Remove
+                  </button>
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+function toggleFavorite(id) {
+
+  if (favorites.includes(id)) {
+
+    favorites =
+      favorites.filter(
+        x => x !== id
+      );
+
+    toast(
+      "Removed from favorites."
+    );
+
+  } else {
+
+    favorites.push(id);
+
+    toast(
+      "Added to favorites."
+    );
+
+  }
+
+
+  saveState();
+
+  applyFilters();
+
+
+  if (
+    !document
+      .getElementById("favoritesModal")
+      .classList
+      .contains("hidden")
+  ) {
+
+    renderFavorites();
+
+  }
+
+
+  if (
+    activeCarId === id &&
+    !document
+      .getElementById("detailsModal")
+      .classList
+      .contains("hidden")
+  ) {
+
+    document
+      .getElementById("modalFavBtn")
+      .textContent =
+        favorites.includes(id)
+          ? "♥ Remove Favorite"
+          : "♡ Add to Favorites";
+
+  }
+
+}
+
+
+function updateFavoriteCount() {
+
+  const badge =
+    document.getElementById("favCount");
+
+
+  badge.textContent =
+    favorites.length;
+
+
+  badge.classList.toggle(
+    "hidden",
+    favorites.length === 0
+  );
+
+
+  badge.classList.toggle(
+    "flex",
+    favorites.length > 0
+  );
+
+}
+
+
+function closeModal(id) {
+
+  document
+    .getElementById(id)
+    .classList
+    .add("hidden");
+
+
+  if (
+    [
+      ...document.querySelectorAll(
+        ".modal-backdrop"
+      )
+    ]
+    .every(
+      m => m.classList.contains("hidden")
+    )
+  ) {
+
+    document.body.classList.remove(
+      "overflow-hidden"
+    );
+
+  }
+
+}
+
+
+function contactWhatsApp(carName) {
+
+  const message =
+    encodeURIComponent(
+      `Hi QedesaAuto, I'm interested in the ${carName}. Is it still available?`
+    );
+
+
+  /*
+    Replace 254700000000
+    with your real QedesaAuto WhatsApp number.
+  */
+
+  window.open(
+    `https://wa.me/254700000000?text=${message}`,
+    "_blank"
+  );
+
+}
+
+
+function toast(message) {
+
+  const container =
+    document.getElementById(
+      "toastContainer"
+    );
+
+
+  const el =
+    document.createElement("div");
+
+
+  el.className =
+    "toast bg-[#11100E] border border-[#3A3429] shadow-2xl rounded-xl px-4 py-3 text-sm";
+
+
+  el.textContent =
+    message;
+
+
+  container.appendChild(el);
+
+
+  setTimeout(
+    () => el.remove(),
+    3100
+  );
+
+}
+
+
+function scrollToTop() {
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+document
+  .getElementById("sellForm")
+  .addEventListener(
+    "submit",
+    function(e) {
+
+      e.preventDefault();
+
+
+      const data =
+        new FormData(this);
+
+
+      const newCar = {
+
+        id:
+          "user-" +
+          Date.now(),
+
+        title:
+          data.get("title").trim(),
+
+        brand:
+          data.get("brand").trim(),
+
+        price:
+          Number(data.get("price")),
+
+        year:
+          Number(data.get("year")),
+
+        mileage:
+          Number(data.get("mileage")),
+
+        fuel:
+          data.get("fuel"),
+
+        transmission:
+          data.get("transmission"),
+
+        location:
+          data.get("location").trim(),
+
+        image:
+          data.get("image").trim()
+          ||
+          "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=85",
+
+        badge:
+          "New Listing",
+
+        verified:
+          false,
+
+        description:
+          data.get("description").trim()
+          ||
+          "New vehicle listing on QedesaAuto."
+
+      };
+
+
+      cars.unshift(newCar);
+
+      saveState();
+
+      setupFilters();
+
+      resetFilters();
+
+      closeModal("sellModal");
+
+      this.reset();
+
+      toast(
+        "Your car listing has been published."
+      );
+
+
+      document
+        .getElementById("inventory")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
+
+    }
+  );
+
+
+document.addEventListener(
+  "keydown",
+  e => {
+
+    if (e.key === "Escape") {
+
+      document
+        .querySelectorAll(
+          ".modal-backdrop"
+        )
+        .forEach(
+          m => m.classList.add("hidden")
+        );
+
+      document.body.classList.remove(
+        "overflow-hidden"
+      );
+
+    }
+
+  }
+);
+
+
+document
+  .querySelectorAll(
+    ".modal-backdrop"
+  )
+  .forEach(modal => {
+
+    modal.addEventListener(
+      "click",
+      e => {
+
+        if (e.target === modal) {
+
+          closeModal(modal.id);
+
+        }
+
+      }
+    );
+
+  });
+
+
+setupFilters();
+
+updateFavoriteCount();
+
+applyFilters();
+
+</script>
 
 </body>
 </html>
